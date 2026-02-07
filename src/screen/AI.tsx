@@ -25,7 +25,7 @@ if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental
 }
 
 // --- 🔑 API CONFIGURATION ---
-const API_KEY = 'your_api_key_here';
+const API_KEY = 'AIzaSyCv9FWlO9W8bYKeWgQulSul7hCXBw6LunM';
 const MODEL_NAME = 'gemini-flash-latest';
 
 interface Message { id: string; type: 'user' | 'ai'; text: string; }
@@ -170,7 +170,6 @@ Reply in 3–5 short lines max, casual tone, light emojis.
       return "Network error — check your connection.";
     }
   };
-
   const handleSend = async () => {
     if (!query.trim()) return;
     const userText = query;

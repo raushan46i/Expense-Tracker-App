@@ -25,8 +25,10 @@ const ExpenseItemCard: React.FC<ExpenseItemCardProps> = (props) => {
   if (!expense) return null;
 
   // Handle category name safely
-  const categoryName = (expense.category as any)?.name || 'General';
-  const icon = expense.icon || (expense.category as any)?.icon || '💰';
+  const categoryName = expense.category || 'General';
+
+  const icon = expense.icon || '💰';
+
 
   return (
     <>
@@ -71,7 +73,8 @@ const ExpenseItemCard: React.FC<ExpenseItemCardProps> = (props) => {
           <View style={styles.actionRow}>
             {/* EDIT BUTTON */}
             <TouchableOpacity
-              onPress={() => navigation.navigate('Create', { expense })}
+              onPress={() => navigation.getParent()?.navigate('Create', { expense })
+}
               style={[styles.actionBtn, { backgroundColor: theme.isDark ? 'rgba(59, 130, 246, 0.2)' : '#DBEAFE' }]}
             >
               <Icon name="edit" size={16} color="#3B82F6" />

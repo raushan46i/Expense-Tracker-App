@@ -181,7 +181,8 @@ const Create: React.FC<CreateProps> = ({ navigation, route }) => {
       setAmount('');
       setTitle('');
       Keyboard.dismiss();
-      navigation.navigate('BottomTabs', { screen: 'Home' });
+      navigation.getParent()?.navigate('BottomTabs', { screen: 'Home' });
+
     } catch (error) {
       console.error("Save failed", error);
       Alert.alert("Error", "Could not save expense.");

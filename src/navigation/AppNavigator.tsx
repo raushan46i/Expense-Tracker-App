@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native'; // Import View for the dummy component
+import { View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -15,7 +15,7 @@ import Settings from '../screen/Settings';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-// 1. Define Bottom Tabs (Without the actual Create Screen)
+// Bottom Tabs
 function BottomTabs() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
@@ -29,14 +29,13 @@ function BottomTabs() {
         }}
       />
 
-      {/* 2. The "Fake" Create Tab (Just a button) */}
       <Tab.Screen
         name="CreateTab"
-        component={View} // Dummy component
+        component={View}
         listeners={({ navigation }) => ({
           tabPress: (e) => {
-            e.preventDefault(); // Stop default tab switch
-            navigation.navigate('Create'); // Open the Modal instead
+            e.preventDefault();
+            navigation.getParent()?.navigate('Create'); // ✅ Correct way
           },
         })}
         options={{
@@ -80,24 +79,21 @@ function BottomTabs() {
   );
 }
 
-// 3. Root Stack (Where the real Modals live)
+// Root Stack
 export default function AppNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {/* The Main App (Tabs) */}
       <Stack.Screen name="BottomTabs" component={BottomTabs} />
 
-      {/* Create Screen (Now a Modal) */}
       <Stack.Screen
         name="Create"
         component={Create}
         options={{
-          presentation: 'modal', // This makes it slide up!
+          presentation: 'modal',
           animation: 'slide_from_bottom',
         }}
       />
 
-      {/* Category Screen (Also a Modal) */}
       <Stack.Screen
         name="Category"
         component={Category}

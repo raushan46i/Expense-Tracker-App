@@ -76,28 +76,30 @@ const BottomTabs = ({ navigation }: any) => {
       />
 
       {/* 3. CREATE (Middle Button - Opens Modal) */}
-      <Tab.Screen
-        name="Add" // Renamed to "Add" to distinguish from the "Create" screen
-        component={View} // Dummy component, never rendered
-        listeners={() => ({
-          tabPress: (e) => {
-            e.preventDefault(); // Prevent switching to this tab
-            navigation.navigate('Create'); // Open the Modal defined in RootNavigator
-          },
-        })}
-        options={{
-          tabBarIcon: () => (
-            <View style={[styles.middleButtonWrapper, { backgroundColor: theme.colors.background.primary }]}>
-              <LinearGradient
-                colors={[theme.colors.primary.start, theme.colors.primary.end]}
-                style={styles.middleButtonGradient}
-              >
-                <Icon name="add" size={32} color="white" />
-              </LinearGradient>
-            </View>
-          ),
-        }}
-      />
+      {/* 3. CREATE (Middle Button - Opens Modal) */}
+<Tab.Screen
+  name="Add"
+  component={View} // Dummy component
+  listeners={({ navigation }) => ({ // Pull navigation directly from the listener arguments
+    tabPress: (e) => {
+      e.preventDefault(); 
+      // Try navigating directly; if that fails, use the parent
+      navigation.navigate('Create'); 
+    },
+  })}
+  options={{
+    tabBarIcon: () => (
+      <View style={[styles.middleButtonWrapper, { backgroundColor: theme.colors.background.primary }]}>
+        <LinearGradient
+          colors={[theme.colors.primary.start, theme.colors.primary.end]}
+          style={styles.middleButtonGradient}
+        >
+          <Icon name="add" size={32} color="white" />
+        </LinearGradient>
+      </View>
+    ),
+  }}
+/>
 
       {/* 4. AI */}
       <Tab.Screen
